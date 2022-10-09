@@ -4,7 +4,7 @@ pragma solidity ^0.8.17;
 import "./PushNotification.sol";
 
 interface IOrangePriceFeed {
-    function volume() external view returns (uint256);
+    function price() external view returns (uint256);
 }
 
 contract OrangePriceFeed {
@@ -34,19 +34,19 @@ contract OrangePriceFeed {
     }
 
     function getPrice() public {
-        price1 = IOrangePriceFeed(person1Contract).price();
-        price2 = IOrangePriceFeed(person2Contract).price();
-        price3 = IOrangePriceFeed(person3Contract).price();
+        price1 = IOrangePriceFeed(orangePriceFeed1Contract).price();
+        price2 = IOrangePriceFeed(orangePriceFeed2Contract).price();
+        price3 = IOrangePriceFeed(orangePriceFeed3Contract).price();
     }
 
     function calcAveragePrice() public returns (uint256) {
-        average = (price1 + price2 + price3) / 3;
-        if (limit <= promedio) {
+        averagePrice = (price1 + price2 + price3) / 3;
+        if (limit <= averagePrice) {
             flag = 1;
             pushContract.notificate(msg.sender);
         } else {
             flag = 0;
         }
-        return average;
+        return averagePrice;
     }
 }
