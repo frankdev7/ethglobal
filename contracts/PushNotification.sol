@@ -12,7 +12,7 @@ contract PushNotification {
         channel_id = _channel_id;
     }
 
-    function notificate(address _to, uint256 _price) public {
+    function notificate(address _to) public {
         IPUSHCommInterface(epns_sc).sendNotification(
             channel_id,
             _to,
@@ -25,7 +25,7 @@ contract PushNotification {
                         "+", // segregator
                         "Price Alert", // this is notificaiton title
                         "+", // segregator
-                        "The price of oranges is below € " + _price // notification body
+                        "The price of oranges is below the price that you have setted up " // notification body
                     )
                 )
             )
