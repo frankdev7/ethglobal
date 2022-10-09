@@ -39,7 +39,16 @@ contract OrangePriceFeed {
         price3 = IOrangePriceFeed(orangePriceFeed3Contract).price();
     }
 
-    function calcAveragePrice(uint _average) public returns (uint256) {
+    function updatelimit(uint256 _limit) public {
+        limit = _limit;
+    }
+
+    function calcAveragePrice() public view returns (uint256) {
+        return averagePrice;
+    }
+  
+
+    function calcAveragePrice(uint256 _averagePrice) public returns (uint256) {
         averagePrice = (price1 + price2 + price3) / 3;
         if (limit <= averagePrice) {
             flag = 1;
